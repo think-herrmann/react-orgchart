@@ -1,0 +1,32 @@
+export interface Config {
+    animationDuration: number;
+    nodeWidth: number;
+    nodeHeight: number;
+    nodeSpacing: number;
+    nodePaddingX: number;
+    nodePaddingY: number;
+    nodeBorderRadius: number;
+    avatarWidth: number;
+    lineDepthY: number;
+    backgroundColor: string;
+    borderColor: string;
+    nameColor: string;
+    titleColor: string;
+    reportsColor: string;
+    shouldResize: boolean;
+    nameFontSize: number;
+    titleFontSize: number;
+    titleYTopDistance: number;
+    countFontSize: number;
+    countYTopDistance: number;
+    maxNameWordLength: number;
+    maxTitleWordLength: number;
+    maxCountWordLength: number;
+    onEntityLinkClick?: (data: any, event: any) => void;
+    onNameClick?: (data: any, event: any) => void;
+    onCountClick?: (data: any, event: any) => void;
+    getName?: (data: any) => string;
+    getTitle?: (data: any) => string;
+    getCount?: (data: any) => string;
+}
+export declare const config: Config;

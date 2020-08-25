@@ -37,7 +37,6 @@ build
 docs
 dist
 yarn.lock
-pkg
 build
 _output
 snowpack.lock.json

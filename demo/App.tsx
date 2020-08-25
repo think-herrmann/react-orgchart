@@ -3,12 +3,14 @@ import { arrayToTree } from 'performant-array-to-tree';
 
 import { OrgChart } from '../src';
 import { data } from './testdata';
+import { icon } from '@fortawesome/fontawesome-svg-core'
+import { faBuilding } from '@fortawesome/free-solid-svg-icons'
 
 // @ts-expect-error
 import avatarPersonnel from './assets/avatar-personnel.svg';
 
 const tree = arrayToTree(
-  data.map(x => ({ ...x, entity: { ...x, avatar: avatarPersonnel }, parentId: x.reportsTo?.id })),
+    data.map(x => ({ ...x, entity: { ...x, avatar: icon(faBuilding).html }, parentId: x.reportsTo?.id })),
   { dataField: null },
 );
 

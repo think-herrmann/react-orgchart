@@ -156,7 +156,7 @@ export function render(config) {
     .attr('height', avatarWidth)
     .attr('x', avatarPos.x)
     .attr('y', avatarPos.y)
-    .svg( d.data.entity.avatar)
+    .html( d => d.data.entity.avatar)
 
   // Entity's Link
   let nodeLink = nodeEnter

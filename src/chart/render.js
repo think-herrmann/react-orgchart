@@ -150,16 +150,13 @@ export function render(config) {
 
   // Entity's Avatar
   nodeEnter
-    .append('image')
+    .append('svg')
     .attr('id', d => `image-${d.data.id}`)
     .attr('width', avatarWidth)
     .attr('height', avatarWidth)
     .attr('x', avatarPos.x)
     .attr('y', avatarPos.y)
-    .attr('stroke', borderColor)
-    .attr('src', d => d.data.entity.avatar)
-    .attr('href', d => d.data.entity.avatar)
-    .attr('clip-path', 'url(#avatarClip)');
+    .svg( d.data.entity.avatar)
 
   // Entity's Link
   let nodeLink = nodeEnter

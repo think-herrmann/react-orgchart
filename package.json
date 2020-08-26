@@ -12,7 +12,6 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts, .",
     "lint:fix": "eslint --fix --ext .js,.ts, .",
-    "prepare": "npm run build",
     "build": "pika build",
     "watch:demo": "parcel serve demo/index.html --open",
     "build:demo": "parcel build demo/index.html",

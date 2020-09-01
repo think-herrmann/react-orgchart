@@ -3,6 +3,7 @@ import * as helpers from '../utils/index';
 import { renderLines } from './renderLines';
 import { onClick } from './onClick';
 import { iconLink } from './components/iconLink';
+import { faBuilding, faUser } from '@fortawesome/free-solid-svg-icons';
 const CHART_NODE_CLASS = 'org-chart-node';
 const ENTITY_LINK_CLASS = 'org-chart-entity-link';
 const ENTITY_NAME_CLASS = 'org-chart-entity-name';
@@ -109,7 +110,7 @@ export function render(config) {
         .attr('height', avatarWidth)
         .attr('x', avatarPos.x)
         .attr('y', avatarPos.y)
-        .html(d => d.data.entity.avatar);
+        .html(d => d.type == 'practitioner' ? faUser : faBuilding);
     // Entity's Link
     let nodeLink = nodeEnter
         .append('a')

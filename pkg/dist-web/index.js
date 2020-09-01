@@ -4,6 +4,7 @@ import { zoom, zoomIdentity } from 'd3-zoom';
 import { hierarchy, tree } from 'd3-hierarchy';
 import truncate from 'lodash.truncate';
 import { line, curveLinear } from 'd3-shape';
+import { faUser, faBuilding } from '@fortawesome/free-solid-svg-icons';
 
 function collapse(d) {
     // Check if this node has children
@@ -375,7 +376,7 @@ function render(config) {
         .attr('height', avatarWidth)
         .attr('x', avatarPos.x)
         .attr('y', avatarPos.y)
-        .html(d => d.data.entity.avatar);
+        .html(d => d.type == 'practitioner' ? faUser : faBuilding);
     // Entity's Link
     let nodeLink = nodeEnter
         .append('a')

@@ -2,15 +2,7 @@
 
 Small react wrapper around a [d3](https://d3js.org/) based org chart.
 
-This is based on [smartprocure/react-org-chart](https://github.com/smartprocure/react-org-chart) which itself is also a fork. This fork has been updated to use d3 v5 and expose typescript types.
-
-DEMO: https://ctrl-react-orgchart.vercel.app
-
-### Install
-
-```console
-npm install @ctrl/react-orgchart
-```
+The latest fork by Herrmann Intl. is to add support for arbitrary svg so we could use font awesome
 
 ### Use
 
@@ -23,6 +15,9 @@ import { OrgChart } from '@ctrl/react-orgchart';
 #### Sample tree data
 
 ```js
+import { icon } from '@fortawesome/fontawesome-svg-core'
+import { faBuilding, faUser } from '@fortawesome/free-solid-svg-icons'
+
 {
   id: 1,
   entity: {
@@ -38,7 +33,7 @@ import { OrgChart } from '@ctrl/react-orgchart';
       entity: {
         id: 2,
         // svg example
-        avatar: '<svg></svg>',
+        avatar: icon(faUser).html,
         name: 'John Foo',
         title: 'CTO',
       },
@@ -47,3 +42,9 @@ import { OrgChart } from '@ctrl/react-orgchart';
   ],
 }
 ```
+
+### Building
+
+`yarn install`
+
+After making changes in this repo, run `yarn run build`.  Be sure to add the built files with the commit.

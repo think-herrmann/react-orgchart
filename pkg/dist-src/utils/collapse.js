@@ -3,5 +3,6 @@ export function collapse(d) {
     if (d.children) {
         d._children = d.children;
         d.children = null;
+        d.collapsed = true;
     }
 }

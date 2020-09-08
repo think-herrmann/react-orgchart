@@ -144,6 +144,30 @@ export function init(options) {
   feMerge.append('feMergeNode').attr('in', 'offsetOut');
   feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
 
+  // Add Stack Shadow
+  const stackFilter = svgroot
+        .append('svg:defs')
+        .append('svg:filter')
+        .attr('id', 'stackShadow')
+        .attr('height', '150%')
+        .attr('width', '150%')
+  stackFilter.html(`
+<feOffset in="SourceAlpha" dy="4" dx="4" result="inner"></feOffset>
+<feOffset in="SourceAlpha" dx="6" dy="6" result="outer"></feOffset>
+<feOffset in="SourceAlpha" dy="2" dx="2" result="inner2"></feOffset>
+<feOffset in="SourceAlpha" dx="3" dy="3" result="outer2"></feOffset>
+<feComposite result="stack" in="outer" operator="out" in2="inner"></feComposite>
+<feComposite result="stack2" in="outer2" operator="out" in2="inner2"></feComposite>
+<feFlood result="COLOR-black" flood-color="#acaaad"></feFlood>
+<feComposite in="COLOR-black" operator="in" result="finalstack" in2="stack"></feComposite>
+<feComposite in="COLOR-black" operator="in" result="finalstack2" in2="stack2"></feComposite>
+<feMerge>
+  <feMergeNode in="finalstack"></feMergeNode>
+  <feMergeNode in="finalstack2"></feMergeNode>
+  <feMergeNode in="SourceGraphic"></feMergeNode>
+</feMerge>
+`)
+
   // Add listener for when the browser or parent node resizes
   const resize = () => {
     if (!elem) {

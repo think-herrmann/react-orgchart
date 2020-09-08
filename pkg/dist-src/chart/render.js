@@ -25,6 +25,12 @@ export function render(config) {
     // Update the nodes
     let node = svg.selectAll('g.' + CHART_NODE_CLASS).data(nodes, n => n.data.id);
     let parentNode = sourceNode || nodes[0];
+    let shadows = svg.selectAll(`rect.${CHART_NODE_CLASS}-shadow`).data(nodes, n => n.data.id);
+    // Update the shadows for any parents that have been expanded
+    shadows
+        .attr('fill-opacity', (d) => d.collapsed ? 1 : 0.05)
+        .attr('stroke-opacity', (d) => d.collapsed ? 1 : 0.025)
+        .attr('filter', (d) => d.collapsed ? 'url(#stackShadow)' : 'url(#boxShadow)');
     // Enter any new nodes at the parent's previous position.
     const nodeEnter = node
         .enter()
@@ -37,15 +43,16 @@ export function render(config) {
     // Entity Card Shadow
     nodeEnter
         .append('rect')
+        .attr('class', `${CHART_NODE_CLASS}-shadow`)
         .attr('width', nodeWidth)
         .attr('height', nodeHeight)
         .attr('fill', backgroundColor)
         .attr('stroke', borderColor)
         .attr('rx', nodeBorderRadius)
         .attr('ry', nodeBorderRadius)
-        .attr('fill-opacity', 0.05)
-        .attr('stroke-opacity', 0.025)
-        .attr('filter', 'url(#boxShadow)');
+        .attr('fill-opacity', (d) => d.collapsed ? 1 : 0.05)
+        .attr('stroke-opacity', (d) => d.collapsed ? 1 : 0.025)
+        .attr('filter', (d) => d.collapsed ? 'url(#stackShadow)' : 'url(#boxShadow)');
     // Entity Card Container
     nodeEnter
         .append('rect')

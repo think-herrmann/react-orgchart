@@ -18,7 +18,15 @@ export default class App extends React.Component {
   render() {
     // For downloading org chart as image or pdf based on id
     return (
-      <OrgChart tree={tree[0]}/>
+        <>
+          <div>
+            <button id="zoom_in">+</button>
+            <button id="zoom_out">-</button>
+          </div>
+          <OrgChart tree={tree[0]}
+                    controlIds={{zoomIn: "zoom_in", zoomOut: "zoom_out"}}
+          >
+        </>
     );
   }
 }

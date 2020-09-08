@@ -10,6 +10,7 @@ export function init(options) {
         ...options,
         treeData: options.data,
     };
+    console.log({ config });
     if (!config.id) {
         throw new Error('missing id for svg root');
     }
@@ -118,6 +119,15 @@ export function init(options) {
     };
     if (shouldResize) {
         window.addEventListener('resize', resize);
+    }
+    // enable buttons for zooming in and out if control ids are provided
+    if (config.controlIds) {
+        select(`#${config.controlIds.zoomIn}`).on("click", function () {
+            zoom.scaleBy(zoomedRoot.transition().duration(500), 1.5);
+        });
+        select(`#${config.controlIds.zoomOut}`).on("click", function () {
+            zoom.scaleBy(zoomedRoot.transition().duration(500), 0.7);
+        });
     }
     // Start initial render
     render(config);

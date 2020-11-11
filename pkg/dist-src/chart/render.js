@@ -9,7 +9,7 @@ const ENTITY_NAME_CLASS = 'org-chart-entity-name';
 const ENTITY_TITLE_CLASS = 'org-chart-entity-title';
 const COUNTS_CLASS = 'org-chart-counts';
 export function render(config) {
-    const { svg, tree, animationDuration, nodeWidth, nodeHeight, nodePaddingY, nodeBorderRadius, backgroundColor, nameColor, titleColor, reportsColor, borderColor, avatarWidth, lineDepthY, sourceNode, onEntityLinkClick, nameFontSize = 14, titleFontSize = 13, titleYTopDistance = 25, countFontSize = 14, countYTopDistance = 72, maxNameWordLength = 16, maxTitleWordLength = 17, maxCountWordLength = 17, getName, getTitle, getCount, onNameClick, onCountClick, treeMap, } = config;
+    const { svg, tree, animationDuration, nodeWidth, nodeHeight, nodePaddingY, nodeBorderRadius, backgroundColor, nameColor, titleColor, reportsColor, borderColor, lineDepthY, sourceNode, onEntityLinkClick, nameFontSize = 14, titleFontSize = 13, titleYTopDistance = 25, countFontSize = 14, countYTopDistance = 72, maxNameWordLength = 16, maxTitleWordLength = 17, maxCountWordLength = 17, getName, getTitle, getCount, onNameClick, onCountClick, treeMap, } = config;
     // Compute the new tree layout.
     const data = treeMap(tree);
     const nodes = data.descendants();
@@ -66,11 +66,7 @@ export function render(config) {
         .style('cursor', getCursorForNode);
     let namePos = {
         x: nodeWidth / 2,
-        y: nodePaddingY * 1.8 + avatarWidth,
-    };
-    let avatarPos = {
-        x: nodeWidth / 2 - avatarWidth / 2,
-        y: nodePaddingY / 2,
+        y: nodePaddingY * 1.8,
     };
     // Entity's Name
     nodeEnter
@@ -108,15 +104,6 @@ export function render(config) {
         .style('fill', reportsColor)
         .text(d => (typeof getCount === 'function' ? getCount(d) : helpers.getCount(d)))
         .on('click', helpers.customOnClick(onCountClick, onClick, config));
-    // Entity's Avatar
-    nodeEnter
-        .append('svg')
-        .attr('id', d => `image-${d.data.id}`)
-        .attr('width', avatarWidth)
-        .attr('height', avatarWidth)
-        .attr('x', avatarPos.x)
-        .attr('y', avatarPos.y)
-        .html(d => d.data.entity.avatar);
     // Entity's Link
     let nodeLink = nodeEnter
         .append('a')

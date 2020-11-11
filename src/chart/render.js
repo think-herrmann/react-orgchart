@@ -24,7 +24,6 @@ export function render(config) {
     titleColor,
     reportsColor,
     borderColor,
-    avatarWidth,
     lineDepthY,
     sourceNode,
     onEntityLinkClick,
@@ -111,12 +110,7 @@ export function render(config) {
 
   let namePos = {
     x: nodeWidth / 2,
-    y: nodePaddingY * 1.8 + avatarWidth,
-  };
-
-  let avatarPos = {
-    x: nodeWidth / 2 - avatarWidth / 2,
-    y: nodePaddingY / 2,
+    y: nodePaddingY * 1.8,
   };
 
   // Entity's Name
@@ -157,16 +151,6 @@ export function render(config) {
     .style('fill', reportsColor)
     .text(d => (typeof getCount === 'function' ? getCount(d) : helpers.getCount(d)))
     .on('click', helpers.customOnClick(onCountClick, onClick, config));
-
-  // Entity's Avatar
-  nodeEnter
-    .append('svg')
-    .attr('id', d => `image-${d.data.id}`)
-    .attr('width', avatarWidth)
-    .attr('height', avatarWidth)
-    .attr('x', avatarPos.x)
-    .attr('y', avatarPos.y)
-    .html( d => d.data.entity.avatar)
 
   // Entity's Link
   let nodeLink = nodeEnter

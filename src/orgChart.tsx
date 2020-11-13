@@ -23,6 +23,7 @@ type Props = Partial<Config> & {
   id?: string;
   disableCanvasMouseMove?: boolean;
   disableCanvasMouseWheelZoom?: boolean;
+  className?: string;
   tree: TreeItem[] | TreeItem;
 };
 
@@ -55,11 +56,12 @@ export class OrgChart extends React.PureComponent<Props> {
   }
 
   render() {
-    const { id = defaultId } = this.props;
+    const { id = defaultId, className } = this.props;
 
     return React.createElement('div', {
       id,
       ref: this.anchor,
+      className: className,
       style: { width: '100%', height: '100%' },
     });
   }

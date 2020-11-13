@@ -17,6 +17,7 @@ declare type Props = Partial<Config> & {
     id?: string;
     disableCanvasMouseMove?: boolean;
     disableCanvasMouseWheelZoom?: boolean;
+    className?: string;
     tree: TreeItem[] | TreeItem;
 };
 export declare class OrgChart extends React.PureComponent<Props> {
@@ -27,6 +28,7 @@ export declare class OrgChart extends React.PureComponent<Props> {
     render(): React.ReactElement<{
         id: string;
         ref: React.RefObject<unknown>;
+        className: string | undefined;
         style: {
             width: string;
             height: string;

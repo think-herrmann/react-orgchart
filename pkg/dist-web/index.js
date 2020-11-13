@@ -677,10 +677,11 @@ class OrgChart extends React.PureComponent {
         this.onDestroy();
     }
     render() {
-        const { id = defaultId } = this.props;
+        const { id = defaultId, className } = this.props;
         return React.createElement('div', {
             id,
             ref: this.anchor,
+            className: className,
             style: { width: '100%', height: '100%' },
         });
     }

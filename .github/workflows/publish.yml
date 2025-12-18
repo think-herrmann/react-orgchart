@@ -7,10 +7,8 @@ on:
 
 jobs:
   publish:
-    uses: think-herrmann/axon-core/.github/workflows/shared-publish-npm.yml@main
+    uses: think-herrmann/axon-core/.github/workflows/shared-publish-npm.yml@development
     with:
       package_name: '@think-herrmann/react-orgchart'
       build_command: 'npm run build'
       node_version: '20.x'
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

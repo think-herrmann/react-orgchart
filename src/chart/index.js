@@ -1,7 +1,6 @@
 import { select } from 'd3-selection';
 import { zoom as zoomer, zoomIdentity } from 'd3-zoom';
 import { tree, hierarchy } from 'd3-hierarchy';
-import { event } from 'd3-selection';
 
 import { collapse } from '../utils/index';
 import { render } from './render';
@@ -13,8 +12,6 @@ export function init(options) {
     treeData: options.data,
   };
 
-  console.log({config})
-  
   if (!config.id) {
     throw new Error('missing id for svg root');
   }
@@ -85,10 +82,8 @@ export function init(options) {
   config.render = render;
 
   // Defined zoom behavior
-  const zoom = zoomer().scaleExtent([0.1, 1.5]).duration(50).on('zoom', () => {
-    svg.attr('transform', () => {
-      return event.transform;
-    });
+  const zoom = zoomer().scaleExtent([0.1, 1.5]).duration(50).on('zoom', zoomEvent => {
+    svg.attr('transform', zoomEvent.transform.toString());
   });
 
   svgroot.call(zoom.transform, zoomIdentity.translate(centerPoint, 48).scale(0.8));

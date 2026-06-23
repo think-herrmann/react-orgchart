@@ -1,5 +1,5 @@
 import React from 'react';
-import { select, event as event$1 } from 'd3-selection';
+import { select } from 'd3-selection';
 import { zoom, zoomIdentity } from 'd3-zoom';
 import { hierarchy, tree } from 'd3-hierarchy';
 import truncate from 'lodash.truncate';
@@ -89,14 +89,12 @@ const getCount = data => {
     return `Team (${children})`;
 };
 const getCursorForNode = data => data.data.children || data.data._children ? 'pointer' : 'default';
-const customOnClick = (fn, onClick, config) => data => {
+const customOnClick = (fn, onClick, config) => (event, data) => {
     if (typeof fn === 'function') {
-        // eslint-disable-next-line no-restricted-globals
         if (fn(data, event)) {
             onClick(config);
         }
         else {
-            // eslint-disable-next-line no-restricted-globals
             event.stopPropagation();
         }
     }
@@ -203,13 +201,11 @@ function renderLines(config) {
 
 function onClick(config) {
     const { render } = config;
-    return datum => {
-        // eslint-disable-next-line no-restricted-globals
+    return (event, datum) => {
         if (event.defaultPrevented) {
             return;
         }
-        // eslint-disable-next-line no-restricted-globals
-        const link = event && event.target && event.target.closest('a');
+        const link = event.target && event.target.closest && event.target.closest('a');
         if (link && link.href) {
             return;
         }
@@ -454,7 +450,6 @@ function init(options) {
         ...options,
         treeData: options.data,
     };
-    console.log({ config });
     if (!config.id) {
         throw new Error('missing id for svg root');
     }
@@ -504,10 +499,8 @@ function init(options) {
     config.elemHeight = elemHeight;
     config.render = render;
     // Defined zoom behavior
-    const zoom$1 = zoom().scaleExtent([0.1, 1.5]).duration(50).on('zoom', () => {
-        svg.attr('transform', () => {
-            return event$1.transform;
-        });
+    const zoom$1 = zoom().scaleExtent([0.1, 1.5]).duration(50).on('zoom', zoomEvent => {
+        svg.attr('transform', zoomEvent.transform.toString());
     });
     svgroot.call(zoom$1.transform, zoomIdentity.translate(centerPoint, 48).scale(0.8));
     const zoomedRoot = svgroot.call(zoom$1);

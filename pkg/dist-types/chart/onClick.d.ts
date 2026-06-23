@@ -1,1 +1,1 @@
-export function onClick(config: any): (datum: any) => void;
+export function onClick(config: any): (event: any, datum: any) => void;

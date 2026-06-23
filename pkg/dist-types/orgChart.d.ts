@@ -13,7 +13,7 @@ export interface TreeItem {
         title?: string;
     };
 }
-declare type Props = Partial<Config> & {
+type Props = Partial<Config> & {
     id?: string;
     disableCanvasMouseMove?: boolean;
     disableCanvasMouseWheelZoom?: boolean;
@@ -33,6 +33,6 @@ export declare class OrgChart extends React.PureComponent<Props> {
             width: string;
             height: string;
         };
-    }, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)> | null) | (new (props: any) => React.Component<any, any, any>)>;
+    }, string | React.JSXElementConstructor<any>>;
 }
 export {};
